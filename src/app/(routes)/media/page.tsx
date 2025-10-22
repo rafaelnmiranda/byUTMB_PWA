@@ -130,10 +130,21 @@ const MediaPage = () => {
   };
 
   const { data: sheetMedia, isLoading, error } = useFetchSheetData<MediaEntry>("videos", {
-    enabled: Boolean(process.env.NEXT_PUBLIC_SHEETS_BASE_URL),
+    enabled: true, // Sempre tentar carregar, mesmo sem env var
     gid: SHEET_GIDS.videos,
     mapRow: mapMediaRow,
   });
+
+  // Debug para entender o que está acontecendo
+  if (typeof window !== "undefined") {
+    console.log("Media Debug:", {
+      hasEnvVar: Boolean(process.env.NEXT_PUBLIC_SHEETS_BASE_URL),
+      envVar: process.env.NEXT_PUBLIC_SHEETS_BASE_URL,
+      sheetMediaLength: sheetMedia.length,
+      isLoading,
+      error: error?.message,
+    });
+  }
 
   const mediaEntries = useMemo(() => {
     // Se está carregando e não tem dados ainda, não mostra fallbacks
@@ -197,6 +208,20 @@ const MediaPage = () => {
           <p className="text-sm text-brand-yellow">
             ⚠️ Falha ao carregar vídeos do Google Sheets. Exibindo conteúdo padrão.
           </p>
+          <p className="text-xs text-muted mt-2">
+            Erro: {error.message}
+          </p>
+        </div>
+      )}
+
+      {/* Debug info para desenvolvimento */}
+      {process.env.NODE_ENV !== "production" && (
+        <div className="rounded-lg border border-gray-300 bg-gray-50 p-4 text-xs">
+          <p><strong>Debug Info:</strong></p>
+          <p>Env Var: {process.env.NEXT_PUBLIC_SHEETS_BASE_URL ? "✅ Presente" : "❌ Ausente"}</p>
+          <p>Sheet Data: {sheetMedia.length} itens</p>
+          <p>Loading: {isLoading ? "⏳" : "✅"}</p>
+          <p>Error: {error ? "❌ " + error.message : "✅ Nenhum"}</p>
         </div>
       )}
 
