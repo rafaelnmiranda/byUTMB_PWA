@@ -227,26 +227,37 @@ const AgendaPage = () => {
     mapRow: mapAgendaRow,
   });
 
-  const agendaItems = data.length
-    ? data
-    : fallbackAgenda.map((item) => {
-        const weekdayIndex = weekdayKeys.indexOf(item.dia as (typeof weekdayKeys)[number]);
-        const label = weekdayIndex >= 0 ? weekdayLabels[weekdayIndex] : item.dia.toUpperCase();
-        return {
-          id: item.id,
-          dateISO: "2025-09-18",
-          weekday: item.dia,
-          weekdayLabel: label,
-          categoria: item.categoria,
-          titulo: item.titulo,
-          hora_inicio: item.hora_inicio,
-          hora_fim: item.hora_fim,
-          local: item.local ?? "",
-          descricao: item.descricao,
-          link_maps: item.link_maps,
-          imagem: undefined,
-        } satisfies AgendaItem;
-      });
+  const agendaItems = useMemo(() => {
+    // Se está carregando e não tem dados ainda, não mostra fallbacks
+    if (isLoading && data.length === 0) {
+      return [];
+    }
+    
+    // Se tem dados do Google Sheets, usa eles
+    if (data.length > 0) {
+      return data;
+    }
+    
+    // Se não está carregando e não tem dados, mostra fallbacks
+    return fallbackAgenda.map((item) => {
+      const weekdayIndex = weekdayKeys.indexOf(item.dia as (typeof weekdayKeys)[number]);
+      const label = weekdayIndex >= 0 ? weekdayLabels[weekdayIndex] : item.dia.toUpperCase();
+      return {
+        id: item.id,
+        dateISO: "2025-09-18",
+        weekday: item.dia,
+        weekdayLabel: label,
+        categoria: item.categoria,
+        titulo: item.titulo,
+        hora_inicio: item.hora_inicio,
+        hora_fim: item.hora_fim,
+        local: item.local ?? "",
+        descricao: item.descricao,
+        link_maps: item.link_maps,
+        imagem: undefined,
+      } satisfies AgendaItem;
+    });
+  }, [data, isLoading]);
 
   const categoryLabelMap = useMemo(
     () => ({
@@ -333,7 +344,10 @@ const AgendaPage = () => {
       </section>
 
       {isLoading && (
-        <p className="text-sm text-muted">Carregando agenda em tempo real...</p>
+        <div className="flex flex-col items-center gap-3 py-8">
+          <div className="h-6 w-6 animate-spin rounded-full border-2 border-brand-teal border-t-transparent"></div>
+          <p className="text-sm text-muted">Carregando agenda em tempo real...</p>
+        </div>
       )}
 
       {error && (
@@ -342,7 +356,8 @@ const AgendaPage = () => {
         </p>
       )}
 
-      <section className="flex flex-col gap-4">
+      {!isLoading && (
+        <section className="flex flex-col gap-4">
         {filteredItems.length === 0 && (
           <p className="text-sm text-muted">{t("agenda.empty")}</p>
         )}
@@ -377,7 +392,8 @@ const AgendaPage = () => {
             />
           );
         })}
-      </section>
+        </section>
+      )}
     </div>
   );
 };

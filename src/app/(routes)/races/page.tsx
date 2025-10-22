@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useCallback } from "react";
+import { useCallback, useMemo } from "react";
 import Card from "../../components/Card";
 import MapLink from "../../components/MapLink";
 import { useFetchSheetData, type SheetRow } from "../../hooks/useFetchSheetData";
@@ -242,13 +242,26 @@ const RacePage = () => {
     [],
   );
 
-  const { data: sheetRaces } = useFetchSheetData<Race>("percursos", {
+  const { data: sheetRaces, isLoading } = useFetchSheetData<Race>("percursos", {
     enabled: Boolean(process.env.NEXT_PUBLIC_SHEETS_BASE_URL),
     gid: SHEET_GIDS.percursos,
     mapRow: mapRaceRow,
   });
 
-  const races = sheetRaces.length ? sheetRaces : racesFallback;
+  const races = useMemo(() => {
+    // Se está carregando e não tem dados ainda, não mostra fallbacks
+    if (isLoading && sheetRaces.length === 0) {
+      return [];
+    }
+    
+    // Se tem dados do Google Sheets, usa eles
+    if (sheetRaces.length > 0) {
+      return sheetRaces;
+    }
+    
+    // Se não está carregando e não tem dados, mostra fallbacks
+    return racesFallback;
+  }, [sheetRaces, isLoading]);
 
   return (
     <div className="flex flex-col gap-6">
@@ -257,7 +270,15 @@ const RacePage = () => {
         <p className="text-sm text-muted">{t("races.description")}</p>
       </header>
 
-      <section className="flex flex-col gap-4">
+      {isLoading && (
+        <div className="flex flex-col items-center gap-3 py-8">
+          <div className="h-6 w-6 animate-spin rounded-full border-2 border-brand-teal border-t-transparent"></div>
+          <p className="text-sm text-muted">Carregando percursos em tempo real...</p>
+        </div>
+      )}
+
+      {!isLoading && (
+        <section className="flex flex-col gap-4">
         {races.map((race) => {
           const subtitleParts = [
             race.distancia,
@@ -346,7 +367,8 @@ const RacePage = () => {
             />
           );
         })}
-      </section>
+        </section>
+      )}
     </div>
   );
 };

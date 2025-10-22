@@ -182,7 +182,7 @@ export const useFetchSheetData = <TData,>(
 ): SheetState<TData> => {
   const { enabled = true, queryString, gid, mapRow } = options;
   const [data, setData] = useState<TData[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(enabled);
   const [error, setError] = useState<Error>();
 
   const mapRowRef = useRef<Options<TData>["mapRow"]>(mapRow);
