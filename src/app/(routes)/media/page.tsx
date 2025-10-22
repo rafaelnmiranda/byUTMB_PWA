@@ -55,6 +55,25 @@ const extractYouTubeId = (input: string) => {
   return fallback ? fallback[0] : "";
 };
 
+const fallbackMedia: MediaEntry[] = [
+  {
+    sectionId: "highlights",
+    sectionTitle: "Highlights",
+    id: "highlight-1",
+    title: "Paraty Brazil by UTMB - Highlights",
+    videoId: "dQw4w9WgXcQ", // Placeholder YouTube ID
+    description: "Melhores momentos do evento Paraty Brazil by UTMB",
+  },
+  {
+    sectionId: "briefings",
+    sectionTitle: "Briefings",
+    id: "briefing-1", 
+    title: "Briefing Técnico - PTR 20",
+    videoId: "dQw4w9WgXcQ", // Placeholder YouTube ID
+    description: "Instruções técnicas para a prova PTR 20",
+  },
+];
+
 const MediaPage = () => {
   const t = useTranslate();
 
@@ -110,11 +129,26 @@ const MediaPage = () => {
     };
   };
 
-  const { data: mediaEntries } = useFetchSheetData<MediaEntry>("videos", {
+  const { data: sheetMedia, isLoading, error } = useFetchSheetData<MediaEntry>("videos", {
     enabled: Boolean(process.env.NEXT_PUBLIC_SHEETS_BASE_URL),
     gid: SHEET_GIDS.videos,
     mapRow: mapMediaRow,
   });
+
+  const mediaEntries = useMemo(() => {
+    // Se está carregando e não tem dados ainda, não mostra fallbacks
+    if (isLoading && sheetMedia.length === 0) {
+      return [];
+    }
+    
+    // Se tem dados do Google Sheets, usa eles
+    if (sheetMedia.length > 0) {
+      return sheetMedia;
+    }
+    
+    // Se não está carregando e não tem dados, mostra fallbacks
+    return fallbackMedia;
+  }, [sheetMedia, isLoading]);
 
   if (process.env.NODE_ENV !== "production" && typeof window !== "undefined") {
     (window as typeof window & {
@@ -151,7 +185,28 @@ const MediaPage = () => {
         <p className="text-sm text-muted">{t("media.description")}</p>
       </header>
 
-      {sections.map((section) => (
+      {isLoading && (
+        <div className="flex flex-col items-center gap-3 py-8">
+          <div className="h-6 w-6 animate-spin rounded-full border-2 border-brand-teal border-t-transparent"></div>
+          <p className="text-sm text-muted">Carregando vídeos...</p>
+        </div>
+      )}
+
+      {error && (
+        <div className="rounded-lg border border-brand-yellow/30 bg-brand-yellow/10 p-4">
+          <p className="text-sm text-brand-yellow">
+            ⚠️ Falha ao carregar vídeos do Google Sheets. Exibindo conteúdo padrão.
+          </p>
+        </div>
+      )}
+
+      {!isLoading && sections.length === 0 && (
+        <div className="flex flex-col items-center gap-3 py-8">
+          <p className="text-sm text-muted">Nenhum vídeo disponível no momento.</p>
+        </div>
+      )}
+
+      {!isLoading && sections.map((section) => (
         <section key={section.id} className="flex flex-col gap-4">
           <h2 className="text-lg font-semibold text-brand-yellow">
             {section.title}
