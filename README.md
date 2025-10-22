@@ -20,6 +20,20 @@ Configure the base URL in `.env.local` (see `.env.local.example` for a reference
 NEXT_PUBLIC_SHEETS_BASE_URL=https://docs.google.com/spreadsheets/d/<spreadsheet-id>/gviz/tq
 ```
 
+### 3. Deploy no Vercel
+
+Para fazer deploy no Vercel:
+
+1. **Acesse:** https://vercel.com
+2. **Login** com sua conta GitHub
+3. **"New Project"** → **"Import Git Repository"**
+4. **Selecione:** `rafaelnmiranda/byUTMB_PWA`
+5. **Configure Environment Variables:**
+   - `NEXT_PUBLIC_SHEETS_BASE_URL`: `https://docs.google.com/spreadsheets/d/1tsRN2gHLSVr59h3YCTWAXQuVXN8Kc2wqRENCtPTeR_0/gviz/tq`
+6. **Deploy!**
+
+O arquivo `vercel.json` já está configurado com as variáveis necessárias.
+
 > **Tip:** Use **File → Share → Publish to the web** in Google Sheets to make the data readable without authentication, or ensure the spreadsheet is shared publicly with view access.
 
 Each page consumes a different sheet/tab:
