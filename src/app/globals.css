@@ -52,6 +52,8 @@
     rgba(0, 45, 116, 0.78)
   );
   --tab-surface: rgba(0, 45, 116, 0.88);
+  --tab-active-bg: var(--brand-yellow);
+  --tab-active-fg: var(--brand-navy);
   --card-surface: rgba(0, 45, 116, 0.32);
   --card-hover: rgba(0, 196, 179, 0.12);
   --inverse-on-surface: #001a45;
