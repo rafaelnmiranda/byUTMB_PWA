@@ -177,7 +177,7 @@ const RacePage = () => {
         row.strava_embed_id,
         row.strava_id,
         row.strava_route_id,
-        stravaLink,
+        stravaLink || "",
       );
       const stravaMapHash =
         typeof row.strava_map_hash === "string" ? row.strava_map_hash : undefined;

@@ -24,17 +24,30 @@ const PhotoHighlightCard = ({
   logoAlt,
   imagePosition,
 }: PhotoHighlightCardProps) => {
-  const Wrapper = ctaHref ? Link : "article";
-  const baseProps = ctaHref
-    ? { href: ctaHref, target: ctaHref.startsWith("http") ? "_blank" : undefined }
-    : {};
+  const className = "group relative block overflow-hidden rounded-3xl border border-subtle shadow-subtle transition-transform hover:-translate-y-0.5 hover:shadow-lg";
+
+  if (ctaHref) {
+    return (
+      <Link
+        href={ctaHref}
+        target={ctaHref.startsWith("http") ? "_blank" : undefined}
+        className={className}
+      >
+        {renderCardContent()}
+      </Link>
+    );
+  }
 
   return (
-    <Wrapper
-      {...baseProps}
-      className="group relative block overflow-hidden rounded-3xl border border-subtle shadow-subtle transition-transform hover:-translate-y-0.5 hover:shadow-lg"
-    >
-      <div className="relative h-52 w-full sm:h-56">
+    <article className={className}>
+      {renderCardContent()}
+    </article>
+  );
+
+  function renderCardContent() {
+    return (
+      <>
+        <div className="relative h-52 w-full sm:h-56">
         <Image
           src={imageSrc}
           alt={title}
@@ -86,9 +99,10 @@ const PhotoHighlightCard = ({
             </span>
           )}
         </div>
-      </div>
-    </Wrapper>
-  );
+        </div>
+      </>
+    );
+  }
 };
 
 export default PhotoHighlightCard;

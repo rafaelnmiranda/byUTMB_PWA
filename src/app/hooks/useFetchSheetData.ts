@@ -59,7 +59,7 @@ const parseSheetResponse = (payload: string): SheetRow[] => {
   const matrix: SheetRowValue[][] = rows.map(
     (row: { c?: Array<{ v?: SheetRowValue; f?: SheetRowValue }> }) => {
       const cells = row?.c ?? [];
-      return columns.map((_, index) => {
+      return columns.map((_: unknown, index: number) => {
         const cell = cells[index];
         const value =
           cell?.f !== undefined && cell.f !== null
@@ -73,11 +73,11 @@ const parseSheetResponse = (payload: string): SheetRow[] => {
   );
 
   const hasMeaningfulLabels = columns.some(
-    (key, index) =>
+    (key: unknown, index: number) =>
       key &&
       key !== `col_${index}` &&
-      !/^[a-z]$/.test(key) &&
-      !/^col_\d+$/.test(key),
+      !/^[a-z]$/.test(String(key)) &&
+      !/^col_\d+$/.test(String(key)),
   );
 
   let dataMatrix = matrix;
@@ -148,8 +148,8 @@ const parseSheetResponse = (payload: string): SheetRow[] => {
   return dataMatrix
     .map((rowValues) => {
       const record: SheetRow = {};
-      columns.forEach((columnKey, index) => {
-        record[columnKey] =
+      columns.forEach((columnKey: unknown, index: number) => {
+        record[String(columnKey)] =
           rowValues[index] ?? null;
       });
       return record;
