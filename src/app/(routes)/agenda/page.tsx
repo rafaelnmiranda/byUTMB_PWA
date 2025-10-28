@@ -222,7 +222,7 @@ const AgendaPage = () => {
   );
 
   const { data, isLoading, error } = useFetchSheetData<AgendaItem>("dados", {
-    enabled: Boolean(process.env.NEXT_PUBLIC_SHEETS_BASE_URL),
+    enabled: true, // Sempre tentar carregar, mesmo sem env var
     gid: SHEET_GIDS.dados,
     mapRow: mapAgendaRow,
   });

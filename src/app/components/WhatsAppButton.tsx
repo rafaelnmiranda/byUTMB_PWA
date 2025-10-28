@@ -1,4 +1,4 @@
-const SUPPORT_NUMBER = "5521977770000"; // placeholder, replace with official contact
+const SUPPORT_NUMBER = "5511916984686"; // placeholder, replace with official contact
 
 const WhatsAppButton = () => {
   const href = `https://wa.me/${SUPPORT_NUMBER}`;

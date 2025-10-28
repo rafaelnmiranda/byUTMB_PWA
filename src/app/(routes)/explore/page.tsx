@@ -154,7 +154,7 @@ const ExplorePage = () => {
   );
 
   const { data: sheetPartners } = useFetchSheetData<PartnerEntry>("parceiros", {
-    enabled: Boolean(process.env.NEXT_PUBLIC_SHEETS_BASE_URL),
+    enabled: true, // Sempre tentar carregar, mesmo sem env var
     gid: SHEET_GIDS.parceiros,
     mapRow: mapPartnerRow,
   });

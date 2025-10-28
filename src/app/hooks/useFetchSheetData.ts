@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 
-const SHEETS_BASE_URL = process.env.NEXT_PUBLIC_SHEETS_BASE_URL;
+const SHEETS_BASE_URL = process.env.NEXT_PUBLIC_SHEETS_BASE_URL || "https://docs.google.com/spreadsheets/d/1tsRN2gHLSVr59h3YCTWAXQuVXN8Kc2wqRENCtPTeR_0/gviz/tq";
 
 type SheetRowValue = string | number | boolean | null;
 
@@ -173,7 +173,10 @@ const buildSheetUrl = (sheet: string, gid?: string, queryString?: string) => {
   if (queryString) {
     url.searchParams.set("q", queryString);
   }
-  return url.toString();
+  
+  const finalUrl = url.toString();
+  console.log("Google Sheets URL:", finalUrl);
+  return finalUrl;
 };
 
 export const useFetchSheetData = <TData,>(
@@ -200,6 +203,18 @@ export const useFetchSheetData = <TData,>(
     try {
       setIsLoading(true);
       setError(undefined);
+      
+      // Debug para entender o que está acontecendo no Vercel
+      console.log("Fetching sheet data:", {
+        sheet,
+        gid,
+        queryString,
+        enabled,
+        hasEnvVar: Boolean(process.env.NEXT_PUBLIC_SHEETS_BASE_URL),
+        envVar: process.env.NEXT_PUBLIC_SHEETS_BASE_URL,
+        sheetsBaseUrl: SHEETS_BASE_URL,
+      });
+      
       const response = await fetch(buildSheetUrl(sheet, gid, queryString), {
         next: { revalidate: 60 },
       });

@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "dev:env": "NEXT_PUBLIC_SHEETS_BASE_URL=https://docs.google.com/spreadsheets/d/1tsRN2gHLSVr59h3YCTWAXQuVXN8Kc2wqRENCtPTeR_0/gviz/tq next dev",
     "build": "next build",
     "start": "next start",
     "lint": "eslint"

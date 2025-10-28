@@ -243,7 +243,7 @@ const RacePage = () => {
   );
 
   const { data: sheetRaces, isLoading } = useFetchSheetData<Race>("percursos", {
-    enabled: Boolean(process.env.NEXT_PUBLIC_SHEETS_BASE_URL),
+    enabled: true, // Sempre tentar carregar, mesmo sem env var
     gid: SHEET_GIDS.percursos,
     mapRow: mapRaceRow,
   });
