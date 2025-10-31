@@ -78,9 +78,6 @@ const MediaPage = () => {
   const t = useTranslate();
 
   const mapMediaRow = (row: SheetRow, index: number): MediaEntry | null => {
-    if (process.env.NODE_ENV !== "production") {
-      console.debug("Media row", index, row);
-    }
     const title =
       typeof row.titulo === "string"
         ? row.titulo
@@ -135,16 +132,6 @@ const MediaPage = () => {
     mapRow: mapMediaRow,
   });
 
-  // Debug para entender o que está acontecendo
-  if (typeof window !== "undefined") {
-    console.log("Media Debug:", {
-      hasEnvVar: Boolean(process.env.NEXT_PUBLIC_SHEETS_BASE_URL),
-      envVar: process.env.NEXT_PUBLIC_SHEETS_BASE_URL,
-      sheetMediaLength: sheetMedia.length,
-      isLoading,
-      error: error?.message,
-    });
-  }
 
   const mediaEntries = useMemo(() => {
     // Se está carregando e não tem dados ainda, não mostra fallbacks
@@ -161,12 +148,6 @@ const MediaPage = () => {
     return fallbackMedia;
   }, [sheetMedia, isLoading]);
 
-  if (process.env.NODE_ENV !== "production" && typeof window !== "undefined") {
-    (window as typeof window & {
-      __mediaEntries?: MediaEntry[];
-    }).__mediaEntries = mediaEntries;
-    console.debug("Media entries", mediaEntries);
-  }
 
   const sections = useMemo(() => {
     const grouped = new Map<string, MediaEntry[]>();
@@ -214,16 +195,6 @@ const MediaPage = () => {
         </div>
       )}
 
-      {/* Debug info para desenvolvimento */}
-      {process.env.NODE_ENV !== "production" && (
-        <div className="rounded-lg border border-gray-300 bg-gray-50 p-4 text-xs">
-          <p><strong>Debug Info:</strong></p>
-          <p>Env Var: {process.env.NEXT_PUBLIC_SHEETS_BASE_URL ? "✅ Presente" : "❌ Ausente"}</p>
-          <p>Sheet Data: {sheetMedia.length} itens</p>
-          <p>Loading: {isLoading ? "⏳" : "✅"}</p>
-          <p>Error: {error ? "❌ " + error.message : "✅ Nenhum"}</p>
-        </div>
-      )}
 
       {!isLoading && sections.length === 0 && (
         <div className="flex flex-col items-center gap-3 py-8">

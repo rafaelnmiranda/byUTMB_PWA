@@ -2,8 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import LangSwitcher from "./LangSwitcher";
-import ThemeSwitcher from "./ThemeSwitcher";
+import SettingsMenu from "./SettingsMenu";
 
 const Header = () => {
   return (
@@ -20,10 +19,7 @@ const Header = () => {
           />
         </div>
       </Link>
-      <div className="flex items-center gap-2">
-        <ThemeSwitcher />
-        <LangSwitcher />
-      </div>
+      <SettingsMenu />
     </header>
   );
 };

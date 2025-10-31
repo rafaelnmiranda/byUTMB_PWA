@@ -154,12 +154,14 @@ const TabMenu = () => {
               viewBox="0 0 24 24"
               fill="none"
               className={`transition-transform ${
-                isActive ? "scale-105" : "group-hover:scale-105"
+                isActive 
+                  ? `scale-105 text-[var(--tab-active-fg)]` 
+                  : "group-hover:scale-105"
               }`}
             >
               {item.icon}
             </svg>
-            <span>{t(item.labelKey)}</span>
+            <span className={isActive ? `text-[var(--tab-active-fg)]` : ""}>{t(item.labelKey)}</span>
           </Link>
         );
       })}

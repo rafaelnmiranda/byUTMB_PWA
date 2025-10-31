@@ -4,7 +4,7 @@
   "description": "App oficial do Paraty Brazil by UTMB - Agenda, Percursos, Cupons e Media.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#002D74",
+  "background_color": "#00D44",
   "theme_color": "#00C4B3",
   "orientation": "portrait",
   "icons": [

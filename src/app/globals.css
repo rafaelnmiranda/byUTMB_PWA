@@ -3,7 +3,7 @@
 :root {
   color-scheme: light dark;
   --brand-teal: #00c4b3;
-  --brand-navy: #002d74;
+  --brand-navy: #007AFF;
   --brand-yellow: #ffc629;
   --brand-deep-navy: #001a45;
   --header-height: 64px;
@@ -12,7 +12,7 @@
   /* defaults (overridden by theme selectors) */
   --background: var(--brand-deep-navy);
   --surface: rgba(0, 26, 69, 0.92);
-  --surface-alt: rgba(0, 45, 116, 0.55);
+  --surface-alt: rgba(0, 212, 68, 0.55);
   --content-primary: #f5f8ff;
   --content-muted: rgba(245, 248, 255, 0.64);
   --border-subtle: rgba(255, 255, 255, 0.08);
@@ -20,12 +20,12 @@
   --header-surface: linear-gradient(
     135deg,
     rgba(0, 26, 69, 0.9),
-    rgba(0, 45, 116, 0.78)
+    rgba(0, 212, 68, 0.78)
   );
-  --tab-surface: rgba(0, 45, 116, 0.88);
+  --tab-surface: rgba(0, 212, 68, 0.88);
   --tab-active-bg: var(--brand-yellow);
   --tab-active-fg: var(--brand-navy);
-  --card-surface: rgba(0, 45, 116, 0.32);
+  --card-surface: rgba(0, 212, 68, 0.32);
   --card-hover: rgba(0, 196, 179, 0.12);
   --inverse-on-surface: #001a45;
   --background-graphic: radial-gradient(
@@ -33,7 +33,7 @@
       rgba(0, 196, 179, 0.14),
       transparent
     ),
-    radial-gradient(160% 160% at 80% 20%, rgba(0, 45, 116, 0.3), transparent),
+    radial-gradient(160% 160% at 80% 20%, rgba(0, 212, 68, 0.3), transparent),
     #001a45;
 }
 
@@ -41,7 +41,7 @@
   color-scheme: dark;
   --background: var(--brand-deep-navy);
   --surface: rgba(0, 26, 69, 0.92);
-  --surface-alt: rgba(0, 45, 116, 0.55);
+  --surface-alt: rgba(0, 26, 69, 0.55);
   --content-primary: #f5f8ff;
   --content-muted: rgba(245, 248, 255, 0.64);
   --border-subtle: rgba(255, 255, 255, 0.08);
@@ -49,12 +49,12 @@
   --header-surface: linear-gradient(
     135deg,
     rgba(0, 26, 69, 0.9),
-    rgba(0, 45, 116, 0.78)
+    rgba(0, 26, 69, 0.95)
   );
-  --tab-surface: rgba(0, 45, 116, 0.88);
+  --tab-surface: rgba(0, 26, 69, 0.95);
   --tab-active-bg: var(--brand-yellow);
-  --tab-active-fg: var(--brand-navy);
-  --card-surface: rgba(0, 45, 116, 0.32);
+  --tab-active-fg: var(--brand-deep-navy);
+  --card-surface: rgba(0, 26, 69, 0.32);
   --card-hover: rgba(0, 196, 179, 0.12);
   --inverse-on-surface: #001a45;
   --background-graphic: radial-gradient(
@@ -62,7 +62,7 @@
       rgba(0, 196, 179, 0.14),
       transparent
     ),
-    radial-gradient(160% 160% at 80% 20%, rgba(0, 45, 116, 0.3), transparent),
+    radial-gradient(160% 160% at 80% 20%, rgba(0, 26, 69, 0.5), transparent),
     #001a45;
 }
 
@@ -70,21 +70,21 @@
   color-scheme: light;
   --background: #f7f9ff;
   --surface: rgba(255, 255, 255, 0.9);
-  --surface-alt: rgba(0, 45, 116, 0.12);
+  --surface-alt: rgba(0, 212, 68, 0.12);
   --content-primary: #0c1a2a;
   --content-muted: rgba(12, 26, 42, 0.64);
   --border-subtle: rgba(12, 26, 42, 0.12);
-  --border-strong: rgba(0, 45, 116, 0.2);
+  --border-strong: rgba(0, 212, 68, 0.2);
   --header-surface: rgba(255, 255, 255, 0.92);
   --tab-surface: rgba(255, 255, 255, 0.95);
-  --tab-active-bg: var(--brand-navy);
+  --tab-active-bg: var(--brand-deep-navy);
   --tab-active-fg: #ffffff;
   --card-surface: rgba(255, 255, 255, 0.92);
   --card-hover: rgba(0, 196, 179, 0.1);
   --inverse-on-surface: #f7f9ff;
   --background-graphic: radial-gradient(
       120% 120% at 50% 0%,
-      rgba(0, 45, 116, 0.08),
+      rgba(0, 212, 68, 0.08),
       transparent
     ),
     radial-gradient(180% 180% at 80% 20%, rgba(0, 196, 179, 0.12), transparent),

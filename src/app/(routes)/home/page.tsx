@@ -58,6 +58,8 @@ const HomePage = () => {
         ))}
       </section>
 
+      {/* Seção "Próxima Prova" oculta - não será usada */}
+      {/* 
       <section className="rounded-3xl border border-subtle bg-card-surface p-6 shadow-subtle">
         <div className="flex items-center justify-between">
           <div className="flex flex-col gap-1">
@@ -74,6 +76,7 @@ const HomePage = () => {
           </div>
         </div>
       </section>
+      */}
 
       <section className="flex flex-col gap-4">
         <div className="flex items-center justify-between">

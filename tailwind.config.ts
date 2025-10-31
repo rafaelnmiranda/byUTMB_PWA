@@ -11,7 +11,7 @@ const config: Config = {
       colors: {
         brand: {
           teal: "#00C4B3",
-          navy: "#002D74",
+          navy: "#007AFF",
           yellow: "#FFC629",
           midnight: "#0C1A2A",
         },
@@ -40,7 +40,7 @@ const config: Config = {
         subtle: "0 8px 24px rgba(0, 0, 0, 0.12)",
       },
       backgroundImage: {
-        "brand-gradient": "linear-gradient(135deg, #002D74 0%, #0C1A2A 100%)",
+        "brand-gradient": "linear-gradient(135deg, #007AFF 0%, #0C1A2A 100%)",
       },
     },
   },
