@@ -72,9 +72,6 @@ const SettingsMenu = () => {
   const { language, setLanguage } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
 
-  const currentTheme = themeOptions.find(opt => opt.value === mode) || themeOptions[0];
-  const currentLang = langOptions.find(lang => lang.code === language) || langOptions[0];
-
   return (
     <div className="relative">
       <button

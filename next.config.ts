@@ -16,10 +16,8 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  experimental: {
-    // Ensure Next.js treats this project folder as the workspace root
-    outputFileTracingRoot: path.join(__dirname),
-  },
+  // Ensure Next.js treats this project folder as the workspace root
+  outputFileTracingRoot: path.join(__dirname),
 };
 
 export default nextConfig;
