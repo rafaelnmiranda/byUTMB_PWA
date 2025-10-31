@@ -76,22 +76,22 @@ const SettingsMenu = () => {
     <div className="relative">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 rounded-xl border border-subtle bg-white dark:bg-slate-900 px-3 py-2 text-sm font-medium transition-all hover:bg-gray-100 dark:hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-teal/20 text-white"
+        className="flex items-center gap-2 rounded-xl border border-subtle bg-gray-200 dark:bg-slate-900 px-3 py-2 text-sm font-medium transition-all hover:bg-gray-300 dark:hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-teal/20 text-gray-900 dark:text-white"
         aria-expanded={isOpen}
         aria-haspopup="true"
         aria-label="Configurações"
       >
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" className="stroke-white">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" className="stroke-gray-900 dark:stroke-white">
           <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" stroke="currentColor" strokeWidth={1.6} />
           <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1 1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" stroke="currentColor" strokeWidth={1.6} />
         </svg>
-        <span className="hidden sm:inline text-white">Configurações</span>
+        <span className="hidden sm:inline text-gray-900 dark:text-white">Configurações</span>
         <svg
           width="12"
           height="12"
           viewBox="0 0 24 24"
           fill="none"
-          className={`transition-transform stroke-white ${isOpen ? "rotate-180" : ""}`}
+          className={`transition-transform stroke-gray-900 dark:stroke-white ${isOpen ? "rotate-180" : ""}`}
         >
           <path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
         </svg>
